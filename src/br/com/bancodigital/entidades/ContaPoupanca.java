@@ -4,10 +4,6 @@ import java.time.LocalDate;
 
 public class ContaPoupanca extends Conta{
 
-    private int agenciaContaPoupanca;
-    private String numeroContaPoupanca;
-    private Double saldo;
-    private LocalDate dataDeCriacaoDaContaPoupanca;
 
     public ContaPoupanca(int agenciaContaPoupanca, String numeroContaPoupanca,
                          Double saldo, LocalDate dataDeCriacaoDaContaPoupanca) {
@@ -17,9 +13,9 @@ public class ContaPoupanca extends Conta{
 
     @Override
     public boolean sacar(Double valorSaque) {
-        Double taxa = 0.02;
-        if(valorSaque <= saldo){
-            saldo -= valorSaque;
+        Double taxa = 0.05;
+        if(valorSaque <= getSaldoConta()){
+            setSaldoConta(getSaldoConta() - (valorSaque + (valorSaque*taxa)));
             return true;
         }
         return false;
@@ -27,7 +23,7 @@ public class ContaPoupanca extends Conta{
 
     @Override
     public void depositar(Double valorDeposito) {
-        saldo += valorDeposito;
+        setSaldoConta(getSaldoConta() + valorDeposito);
     }
 
     @Override
